@@ -3673,3 +3673,103 @@
 [2020-07-14 15:15:13,643] {logging_mixin.py:112} INFO - [2020-07-14 15:15:13,643] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
 [2020-07-14 15:15:13,648] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
 [2020-07-14 15:15:13,680] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.039 seconds
+[2020-07-14 15:15:25,825] {scheduler_job.py:154} INFO - Started process (PID=201538) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:25,828] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:15:25,828] {logging_mixin.py:112} INFO - [2020-07-14 15:15:25,828] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:25,832] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:25,872] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.046 seconds
+[2020-07-14 15:15:37,996] {scheduler_job.py:154} INFO - Started process (PID=201618) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:37,998] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:15:37,999] {logging_mixin.py:112} INFO - [2020-07-14 15:15:37,998] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:38,003] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:38,035] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.039 seconds
+[2020-07-14 15:15:50,189] {scheduler_job.py:154} INFO - Started process (PID=201669) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:50,194] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:15:50,195] {logging_mixin.py:112} INFO - [2020-07-14 15:15:50,195] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:50,199] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:15:50,230] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.041 seconds
+[2020-07-14 15:16:02,381] {scheduler_job.py:154} INFO - Started process (PID=201745) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:02,384] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:16:02,384] {logging_mixin.py:112} INFO - [2020-07-14 15:16:02,384] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:02,388] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:02,422] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.041 seconds
+[2020-07-14 15:16:14,578] {scheduler_job.py:154} INFO - Started process (PID=201804) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:14,581] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:16:14,581] {logging_mixin.py:112} INFO - [2020-07-14 15:16:14,581] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:14,585] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:14,618] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.041 seconds
+[2020-07-14 15:16:26,757] {scheduler_job.py:154} INFO - Started process (PID=201880) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:26,761] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:16:26,761] {logging_mixin.py:112} INFO - [2020-07-14 15:16:26,761] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:26,765] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:26,801] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.043 seconds
+[2020-07-14 15:16:38,923] {scheduler_job.py:154} INFO - Started process (PID=201962) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:38,925] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:16:38,925] {logging_mixin.py:112} INFO - [2020-07-14 15:16:38,925] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:38,931] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:38,971] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.048 seconds
+[2020-07-14 15:16:51,094] {scheduler_job.py:154} INFO - Started process (PID=202012) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:51,096] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:16:51,096] {logging_mixin.py:112} INFO - [2020-07-14 15:16:51,096] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:51,100] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:16:51,131] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.038 seconds
+[2020-07-14 15:17:03,274] {scheduler_job.py:154} INFO - Started process (PID=202124) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:03,276] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:17:03,276] {logging_mixin.py:112} INFO - [2020-07-14 15:17:03,276] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:03,280] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:03,315] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.042 seconds
+[2020-07-14 15:17:15,432] {scheduler_job.py:154} INFO - Started process (PID=202180) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:15,435] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:17:15,436] {logging_mixin.py:112} INFO - [2020-07-14 15:17:15,436] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:15,440] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:15,479] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.048 seconds
+[2020-07-14 15:17:27,602] {scheduler_job.py:154} INFO - Started process (PID=202231) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:27,605] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:17:27,606] {logging_mixin.py:112} INFO - [2020-07-14 15:17:27,606] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:27,610] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:27,654] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.052 seconds
+[2020-07-14 15:17:39,793] {scheduler_job.py:154} INFO - Started process (PID=202325) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:39,795] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:17:39,795] {logging_mixin.py:112} INFO - [2020-07-14 15:17:39,795] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:39,799] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:39,831] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.038 seconds
+[2020-07-14 15:17:51,982] {scheduler_job.py:154} INFO - Started process (PID=202375) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:51,984] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:17:51,984] {logging_mixin.py:112} INFO - [2020-07-14 15:17:51,984] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:51,988] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:17:52,025] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.044 seconds
+[2020-07-14 15:18:04,148] {scheduler_job.py:154} INFO - Started process (PID=202483) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:04,151] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:18:04,151] {logging_mixin.py:112} INFO - [2020-07-14 15:18:04,151] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:04,156] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:04,192] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.044 seconds
+[2020-07-14 15:18:16,289] {scheduler_job.py:154} INFO - Started process (PID=202542) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:16,291] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:18:16,292] {logging_mixin.py:112} INFO - [2020-07-14 15:18:16,292] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:16,297] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:16,329] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.040 seconds
+[2020-07-14 15:18:28,462] {scheduler_job.py:154} INFO - Started process (PID=202598) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:28,465] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:18:28,466] {logging_mixin.py:112} INFO - [2020-07-14 15:18:28,466] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:28,470] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:28,508] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.046 seconds
+[2020-07-14 15:18:40,620] {scheduler_job.py:154} INFO - Started process (PID=202680) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:40,623] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:18:40,624] {logging_mixin.py:112} INFO - [2020-07-14 15:18:40,624] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:40,630] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:40,671] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.051 seconds
+[2020-07-14 15:18:52,812] {scheduler_job.py:154} INFO - Started process (PID=202731) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:52,815] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:18:52,816] {logging_mixin.py:112} INFO - [2020-07-14 15:18:52,815] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:52,820] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:18:52,868] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.055 seconds
+[2020-07-14 15:19:04,974] {scheduler_job.py:154} INFO - Started process (PID=202814) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:04,977] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:19:04,978] {logging_mixin.py:112} INFO - [2020-07-14 15:19:04,978] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:04,983] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:05,014] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.040 seconds
+[2020-07-14 15:19:17,161] {scheduler_job.py:154} INFO - Started process (PID=202871) to work on /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:17,163] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/tutorial.py for tasks to queue
+[2020-07-14 15:19:17,163] {logging_mixin.py:112} INFO - [2020-07-14 15:19:17,163] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:17,168] {scheduler_job.py:1583} INFO - DAG(s) dict_keys(['tutorial']) retrieved from /home/ishwor/airflow/dags/tutorial.py
+[2020-07-14 15:19:17,199] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/tutorial.py took 0.038 seconds
