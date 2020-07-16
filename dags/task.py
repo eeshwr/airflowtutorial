@@ -1,5 +1,5 @@
-import reporting as rep
-from datetime import timedelta, datetime
+from . import reporting as rep
+from datetime import timedelta
 
 # The DAG object; we'll need this to instantiate a DAG
 from airflow import DAG

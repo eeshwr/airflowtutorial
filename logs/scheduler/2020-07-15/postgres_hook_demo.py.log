@@ -3834,3 +3834,23 @@ SyntaxError: invalid syntax
 [2020-07-15 12:51:41,966] {logging_mixin.py:112} INFO - [2020-07-15 12:51:41,966] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/postgres_hook_demo.py
 [2020-07-15 12:51:41,967] {scheduler_job.py:1585} WARNING - No viable dags retrieved from /home/ishwor/airflow/dags/postgres_hook_demo.py
 [2020-07-15 12:51:41,967] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/postgres_hook_demo.py took 0.004 seconds
+[2020-07-15 12:51:55,128] {scheduler_job.py:154} INFO - Started process (PID=363192) to work on /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:51:55,130] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/postgres_hook_demo.py for tasks to queue
+[2020-07-15 12:51:55,130] {logging_mixin.py:112} INFO - [2020-07-15 12:51:55,130] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:51:55,131] {scheduler_job.py:1585} WARNING - No viable dags retrieved from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:51:55,132] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/postgres_hook_demo.py took 0.004 seconds
+[2020-07-15 12:52:08,310] {scheduler_job.py:154} INFO - Started process (PID=363313) to work on /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:08,313] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/postgres_hook_demo.py for tasks to queue
+[2020-07-15 12:52:08,313] {logging_mixin.py:112} INFO - [2020-07-15 12:52:08,313] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:08,314] {scheduler_job.py:1585} WARNING - No viable dags retrieved from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:08,315] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/postgres_hook_demo.py took 0.006 seconds
+[2020-07-15 12:52:21,468] {scheduler_job.py:154} INFO - Started process (PID=363487) to work on /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:21,471] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/postgres_hook_demo.py for tasks to queue
+[2020-07-15 12:52:21,472] {logging_mixin.py:112} INFO - [2020-07-15 12:52:21,472] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:21,472] {scheduler_job.py:1585} WARNING - No viable dags retrieved from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:21,473] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/postgres_hook_demo.py took 0.005 seconds
+[2020-07-15 12:52:34,657] {scheduler_job.py:154} INFO - Started process (PID=363612) to work on /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:34,661] {scheduler_job.py:1571} INFO - Processing file /home/ishwor/airflow/dags/postgres_hook_demo.py for tasks to queue
+[2020-07-15 12:52:34,662] {logging_mixin.py:112} INFO - [2020-07-15 12:52:34,661] {dagbag.py:396} INFO - Filling up the DagBag from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:34,662] {scheduler_job.py:1585} WARNING - No viable dags retrieved from /home/ishwor/airflow/dags/postgres_hook_demo.py
+[2020-07-15 12:52:34,662] {scheduler_job.py:162} INFO - Processing /home/ishwor/airflow/dags/postgres_hook_demo.py took 0.005 seconds

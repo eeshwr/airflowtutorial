@@ -69,8 +69,8 @@ def process_events(events, threshold):# threshold is in minutes
     index = 0
     idle_time = []
     while index < len(events)-1:
-        time_diff = (events[index+1].event_time - events[index].event_time).total_seconds()/60 # convert to minutes
-        if time_diff > threshold:
+        time_diff = (events[index+1].event_time - events[index].event_time).total_seconds()
+        if time_diff > threshold * 60: # convert to seconds
             idle_time.append(time_diff)
         index += 1
     return idle_time
