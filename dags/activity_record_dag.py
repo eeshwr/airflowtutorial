@@ -35,3 +35,16 @@ dag = DAG(
     description='generate activity report',
     schedule_interval=timedelta(days=1),
 )
+
+
+def generate_report(ds, **kwargs):
+    from . import activity_record as rep
+    record = rep.ActivityRecord()
+    record.add_activity_record()
+
+
+t1 = PythonOperator(
+        task_id='t1',
+        provide_context=True,
+        python_callable=generate_report,
+        dag=dag)
