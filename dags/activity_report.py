@@ -1,15 +1,24 @@
 from sqlalchemy.dialects import postgresql
-from .database import table
+from .database import Database
+import sqlalchemy as sa
+from collections import defaultdict
+
 
 class ActivityRecord:
-
-    def __init__(self):
-        self.engine = database.engine
+    db = Database()
+    engine = db.engine
+    reporting_meta = db.table('reporting_meta')
+    events = db.table('events')
+    members = db.table('members')
+    teams = db.teams('teams')
+    workspace_application_catalog = db.table('workspace_application_catalog')
+    application_catalog = db.table('application_catalog')
+    activity_record = db.table('activity_record')
 
     def get_value(self, key):
         with self.engine.connect() as conn:
             cursor = conn.execute(
-                sa.select([reporting_meta.c.value]).where(reporting_meta.c.key == key)
+                sa.select([self.reporting_meta.c.value]).where(self.reporting_meta.c.key == key)
             )
             result = cursor.fetchone()
             if result:
@@ -18,12 +27,12 @@ class ActivityRecord:
 
     def set_value(self, key, value):
         with self.engine.connect() as conn:
-            insert_stmt = postgresql.insert(reporting_meta).values(key=key, value=value)
+            insert_stmt = postgresql.insert(self.reporting_meta).values(key=key, value=value)
             conn.execute(
                 insert_stmt.on_conflict_do_update(
                     constraint="uq_reporting_meta_key",
                     set_=dict(value=insert_stmt.excluded.value),
-                    where=(reporting_meta.c.key == insert_stmt.excluded.key),
+                    where=(self.reporting_meta.c.key == insert_stmt.excluded.key),
                 )
             )
 
@@ -63,7 +72,7 @@ class ActivityRecord:
                     }
 
                     with self.engine.connect() as conn:
-                        conn.execute(activity_record.insert().values(values))
+                        conn.execute(self.activity_record.insert().values(values))
         self.set_value("activity_record", sa.func.now())
 
     def get_events(self, from_timestamp, member):
@@ -71,29 +80,29 @@ class ActivityRecord:
             sa.select(
                 [
                     # events.c.id,
-                    events.c.task_id,
-                    events.c.data,
-                    events.c.event_time,
-                    members.c.workspace_id,
-                    teams.c.id.label("team_id"),
+                    self.events.c.task_id,
+                    self.events.c.data,
+                    self.events.c.event_time,
+                    self.members.c.workspace_id,
+                    self.teams.c.id.label("team_id"),
                 ]
             )
             .select_from(
-                events.join(members, events.c.member_id == members.c.id).join(
-                    teams, members.c.workspace_id == teams.c.workspace_id
+                self.events.join(self.members, self.events.c.member_id == self.members.c.id).join(
+                    self.teams, self.members.c.workspace_id == self.teams.c.workspace_id
                 )
             )
-            .where(events.c.member_id == member)
+            .where(self.events.c.member_id == member)
         )
         if from_timestamp is not None:
             query = query.where(
                 sa.and_(
-                    events.c.event_time > from_timestamp,
-                    events.c.event_time <= sa.func.now(),
+                    self.events.c.event_time > from_timestamp,
+                    self.events.c.event_time <= sa.func.now(),
                 )
             )
         else:
-            query = query.order_by(events.c.event_time).limit(100)
+            query = query.order_by(self.events.c.event_time).limit(100)
         with self.engine.connect() as conn:
             results = conn.execute(query).fetchall()
             return results
@@ -159,18 +168,18 @@ class ActivityRecord:
         return application_to_idle_hours
 
     def get_members(self, from_timestamp):
-        query = sa.select([events.c.member_id, events.c.event_time]).distinct(
-            events.c.member_id
+        query = sa.select([self.events.c.member_id, self.events.c.event_time]).distinct(
+            self.events.c.member_id
         )
         if from_timestamp is not None:
             query = query.where(
                 sa.and_(
-                    events.c.event_time > from_timestamp,
-                    events.c.event_time <= sa.func.now(),
+                    self.events.c.event_time > from_timestamp,
+                    self.events.c.event_time <= sa.func.now(),
                 )
             )
         else:
-            query = query.order_by(events.c.member_id, events.c.event_time).limit(100)
+            query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
         with self.engine.connect() as conn:
             results = conn.execute(query).fetchall()
             return results
@@ -197,15 +206,15 @@ class ActivityRecord:
     def get_application_catalog_by_member(self, member):
         with self.engine.connect() as conn:
             cursor = conn.execute(
-                sa.select([workspace_application_catalog])
+                sa.select([self.workspace_application_catalog])
                 .select_from(
-                    members.join(
-                        workspace_application_catalog,
-                        members.c.workspace_id
-                        == workspace_application_catalog.c.workspace_id,
+                    self.members.join(
+                        self.workspace_application_catalog,
+                        self.members.c.workspace_id
+                        == self.workspace_application_catalog.c.workspace_id,
                     )
                 )
-                .where(members.c.id == member)
+                .where(self.members.c.id == member)
             )
             return cursor.fetchone()
 
@@ -214,7 +223,7 @@ class ActivityRecord:
             application_list = {
                 rec["name"]: rec["id"]
                 for rec in conn.execute(
-                    sa.select([application_catalog.c.name, application_catalog.c.id])
+                    sa.select([self.application_catalog.c.name, self.application_catalog.c.id])
                 )
             }
             return application_list
@@ -224,7 +233,7 @@ class ActivityRecord:
             workspaces_list = {
                 rec["id"]: rec["workspace_id"]
                 for rec in conn.execute(
-                    sa.select([members.c.id, members.c.workspace_id])
+                    sa.select([self.members.c.id, self.members.c.workspace_id])
                 )
             }
             return workspaces_list

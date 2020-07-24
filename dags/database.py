@@ -7,10 +7,10 @@ class Database:
     def __init__(self):
         self.engine = create_engine('postgresql://postgres:postgres@localhost:5433/timetracko')
 
-    def table(self, table, engine):
+    def table(self, table):
         return Table(
                 table,
                 MetaData(bind=None),
                 autoload=True,
-                autoload_with=engine
+                autoload_with=self.engine
             )
