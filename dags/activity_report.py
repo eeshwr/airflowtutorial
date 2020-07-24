@@ -237,3 +237,9 @@ class ActivityRecord:
                 )
             }
             return workspaces_list
+
+
+def removesuffix(string: str, suffix: str, /) -> str:
+    if suffix and string.endswith(suffix):
+        return string[: -len(suffix)]
+    return string[:]
