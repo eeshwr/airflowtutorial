@@ -1,4 +1,4 @@
-from . import reporting as rep
+import reporting as rep
 from datetime import timedelta
 
 # The DAG object; we'll need this to instantiate a DAG

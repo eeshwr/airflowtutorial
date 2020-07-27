@@ -2,9 +2,10 @@ from sqlalchemy.dialects import postgresql
 from database import Database
 import sqlalchemy as sa
 from collections import defaultdict
+import pandas as pd
 
 
-class ActivityRecord:
+class ActivityRecord2:
     db = Database()
     engine = db.engine
     reporting_meta = db.table('reporting_meta')
@@ -35,6 +36,49 @@ class ActivityRecord:
                     where=(self.reporting_meta.c.key == insert_stmt.excluded.key),
                 )
             )
+    
+    def events(self, from_timestamp):
+        query = sa.select(
+                    [
+                        self.events.c.member_id,
+                        self.events.c.event_time,
+                        self.events.c.task_id
+                    ]
+                ).group_by(self.events.member_id, self.events.event_time)
+        if from_timestamp is not None:
+            query = query.where(
+                sa.and_(
+                    self.events.c.event_time > from_timestamp,
+                    self.events.c.event_time <= sa.func.now(),
+                )
+            )
+        else:
+            query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
+        with self.engine.connect() as conn:
+            results = conn.execute(query).fetchall()
+            return results
+
+    def read_events(self, from_timestamp):
+        query = sa.select(
+                    [
+                        self.events.c.member_id,
+                        self.events.c.event_time,
+                        self.events.c.task_id
+                    ]
+                ).group_by(self.events.member_id, self.events.event_time)
+        if from_timestamp is not None:
+            query = query.where(
+                sa.and_(
+                    self.events.c.event_time > from_timestamp,
+                    self.events.c.event_time <= sa.func.now(),
+                )
+            )
+        else:
+            query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
+
+        df = pd.read_sql_query(query, self.engine.connect())
+        df.to_csv('events.csv', index=True, header=True)
+
 
     def add_activity_record(self):
         from_timestamp = self.get_value("activity_record")
@@ -243,3 +287,4 @@ def removesuffix(string: str, suffix: str, /) -> str:
     if suffix and string.endswith(suffix):
         return string[: -len(suffix)]
     return string[:]
+
