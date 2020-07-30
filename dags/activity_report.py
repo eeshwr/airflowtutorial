@@ -13,7 +13,7 @@ class ActivityRecord:
     teams = db.table('teams')
     workspace_application_catalog = db.table('workspace_application_catalog')
     application_catalog = db.table('application_catalog')
-    activity_record = db.table('activity_record')
+   #activity_record = db.table('activity_record')
 
     def get_value(self, key):
         with self.engine.connect() as conn:
@@ -71,9 +71,9 @@ class ActivityRecord:
                         ),
                     }
 
-                    with self.engine.connect() as conn:
-                        conn.execute(self.activity_record.insert().values(values))
-        self.set_value("activity_record", sa.func.now())
+        #    with self.engine.connect() as conn:
+        #                 conn.execute(self.activity_record.insert().values(values))
+        # self.set_value("activity_record", sa.func.now())
 
     def get_events(self, from_timestamp, member):
         query = (

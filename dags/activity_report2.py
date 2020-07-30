@@ -3,18 +3,20 @@ from database import Database
 import sqlalchemy as sa
 from collections import defaultdict
 import pandas as pd
+import ast
+import pendulum
 
 
 class ActivityRecord2:
     db = Database()
     engine = db.engine
     reporting_meta = db.table('reporting_meta')
-    events = db.table('events')
+    #events = db.table('events')
     members = db.table('members')
     teams = db.table('teams')
     workspace_application_catalog = db.table('workspace_application_catalog')
     application_catalog = db.table('application_catalog')
-    activity_record = db.table('activity_record')
+    #activity_record = db.table('activity_record')
 
     def get_value(self, key):
         with self.engine.connect() as conn:
@@ -38,46 +40,88 @@ class ActivityRecord2:
             )
     
     def events(self, from_timestamp):
-        query = sa.select(
-                    [
-                        self.events.c.member_id,
-                        self.events.c.event_time,
-                        self.events.c.task_id
-                    ]
-                ).group_by(self.events.member_id, self.events.event_time)
-        if from_timestamp is not None:
-            query = query.where(
-                sa.and_(
-                    self.events.c.event_time > from_timestamp,
-                    self.events.c.event_time <= sa.func.now(),
-                )
-            )
-        else:
-            query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
+        
         with self.engine.connect() as conn:
+             
+            query = sa.select(
+                        [
+                            self.events.c.member_id,
+                            self.events.c.event_time,
+                            self.events.c.task_id
+                        ]
+                    ).group_by(self.events.member_id, self.events.event_time)
+            if from_timestamp is not None:
+                query = query.where(
+                    sa.and_(
+                        self.events.c.event_time > from_timestamp,
+                        self.events.c.event_time <= sa.func.now(),
+                    )
+                )
+            else:
+                query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
             results = conn.execute(query).fetchall()
             return results
 
-    def read_events(self, from_timestamp):
+    def read_events(self):
+        events = self.db.table('events')
+        from_timestamp = self.get_value("activity_record")
         query = sa.select(
                     [
-                        self.events.c.member_id,
-                        self.events.c.event_time,
-                        self.events.c.task_id
+                        events
                     ]
-                ).group_by(self.events.member_id, self.events.event_time)
+                )
         if from_timestamp is not None:
             query = query.where(
                 sa.and_(
-                    self.events.c.event_time > from_timestamp,
-                    self.events.c.event_time <= sa.func.now(),
+                    events.c.event_time > from_timestamp,
+                    events.c.event_time <= sa.func.now(),
                 )
             )
         else:
-            query = query.order_by(self.events.c.member_id, self.events.c.event_time).limit(100)
+            query = query.order_by(events.c.member_id, events.c.event_time).limit(100)
 
-        df = pd.read_sql_query(query, self.engine.connect())
+        df = pd.read_sql_query(query, con=self.engine)
         df.to_csv('events.csv', index=True, header=True)
+
+    def process_data(self):
+        df = pd.read_csv('events.csv')
+        events_group = df.groupby(['member_id', 'task_id'])
+        data = []
+        for (member, task), events in events_group:
+            idle_hours_with_application = self.get_idle_hours(events.to_dict(orient='record'), 3)
+            for (application, window), app_data in idle_hours_with_application.items():
+                values = {
+                    "member_id": member,
+                    "task_id": task,
+                    # "team_id": app_data[0]["team_id"],
+                    # "workspace_id": app_data[0]["workspace_id"],
+                    "idle_hours": sum([item["idle_hours"] for item in app_data]),
+                    # "start_time": events[0][1],
+                    # "end_time": events[-1][1],
+                    "application_name": application,
+                    "window_title": window,
+                    "productivity_flag": self.get_productivity_flag(
+                        application, member
+                    ),
+                }
+                data.append(values)
+        df = pd.DataFrame.from_records(data)
+        df.to_csv('activity_record.csv', index=True, header=True)
+
+    def write_to_db(self): 
+        df = pd.read_csv('activity_record.csv')          
+        df.to_sql('activity_record', con=self.engine)
+
+
+
+
+
+    # def  process_events(self):
+    #     df = pd.read_csv('events.csv')
+    #     event_groups = dict(list(df.groupby(['member_id', 'task_id'])))
+    #     for (member, task) ,  events in event_groups:
+    #           idle_hours_with_application = self.get_idle_hours(events, 3)
+
 
 
     def add_activity_record(self):
@@ -115,9 +159,9 @@ class ActivityRecord2:
                         ),
                     }
 
-                    with self.engine.connect() as conn:
-                        conn.execute(self.activity_record.insert().values(values))
-        self.set_value("activity_record", sa.func.now())
+        #             with self.engine.connect() as conn:
+        #                 conn.execute(self.activity_record.insert().values(values))
+        # self.set_value("activity_record", sa.func.now())
 
     def get_events(self, from_timestamp, member):
         query = (
@@ -158,10 +202,11 @@ class ActivityRecord2:
         previous_application = None
         previous_window = None
         previous_event_time = None
-        previous_team_id = None
-        previous_workspace_id = None
+        # previous_team_id = None
+        # previous_workspace_id = None
         while True:
-            data = events[index][0]
+            data = events[index]['data']
+            data = ast.literal_eval(data)
             application = data["application"]
             window = data["window_title"]
             if len(application) == 0 or len(window) == 0:
@@ -169,24 +214,25 @@ class ActivityRecord2:
             else:
                 break
         while index < len(events) - 1:
-            data = events[index][0]
-            workspace_id = events[index][2]
-            team_id = events[index][3]
+            data = events[index]['data']
+            # workspace_id = events[index][2]
+            # team_id = events[index][3]
+            data = ast.literal_eval(data)
             application = data["application"]
             window = data["window_title"]
-            event_time = events[index][1]
+            event_time = events[index]['event_time']
             if previous_application is None:
                 previous_application = application
                 previous_window = window
                 previous_event_time = event_time
-                previous_workspace_id = workspace_id
-                previous_team_id = team_id
+                # previous_workspace_id = workspace_id
+                # previous_team_id = team_id
                 index += 1
             else:
                 if (len(application) == 0 or len(window) == 0) or (
                     application == previous_application and window == previous_window
                 ):
-                    time_diff = (event_time - previous_event_time).total_seconds()
+                    time_diff = (pendulum.parse(event_time) - pendulum.parse(previous_event_time)).total_seconds()
                     if time_diff > (idle_threshold * 60):  # convert to seconds
                         idle_time.append(time_diff)
                     if len(application) != 0:
@@ -195,11 +241,11 @@ class ActivityRecord2:
 
                     previous_event_time = event_time
                 else:
-                    application_to_idle_hours[previous_application].append(
+                    application_to_idle_hours[previous_application, previous_window].append(
                         {
                             "idle_hours": sum(idle_time) / 3600,
-                            "team_id": previous_team_id,
-                            "workspace_id": previous_workspace_id,
+                            # "team_id": previous_team_id,
+                            # "workspace_id": previous_workspace_id,
                             "application_name": previous_application,
                             "window_title": previous_window,
                         }
@@ -287,4 +333,11 @@ def removesuffix(string: str, suffix: str, /) -> str:
     if suffix and string.endswith(suffix):
         return string[: -len(suffix)]
     return string[:]
+
+
+
+
+if __name__ == '__main__':
+    report = ActivityRecord2()
+    events = report.process_data()
 
