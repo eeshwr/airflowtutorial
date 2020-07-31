@@ -83,8 +83,6 @@ class AppProductivity:
             events_dict = events.to_dict(orient='record')
             idle_hours_with_application = self.get_idle_hours(events_dict, 3)
             for (application, window), app_data in idle_hours_with_application.items():
-                if member is None:
-                    print("memer is null")
                 values = {
                     "member_id": member,
                     "task_id": task,
