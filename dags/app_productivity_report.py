@@ -117,6 +117,8 @@ class AppProductivity:
             chunksize=1000
         )
 
+        self.set_value("application_productivity_report", sa.func.now())
+  
     def get_idle_hours(self, events, idle_threshold):
         index = 0
         application_to_idle_hours = defaultdict(list)
@@ -238,4 +240,3 @@ def removesuffix(string: str, suffix: str, /) -> str:
     if suffix and string.endswith(suffix):
         return string[: -len(suffix)]
     return string[:]
-
