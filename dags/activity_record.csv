@@ -1,8 +1,0 @@
-,member_id,task_id,idle_hours,application_name,window_title,productivity_flag
-0,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,python-exe,TimeTracko,Undefined
-1,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,vscodium-exe,main_store_dispatcher.py - desktop-client - VSCodium,Productive
-2,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.32507665555555554,python-exe,python,Undefined
-3,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,explorer-exe,UNKNOWN,Undefined
-4,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,vscodium-exe,test - desktop-client - VSCodium,Productive
-5,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,vscodium-exe,dock.qml - desktop-client - VSCodium,Productive
-6,0e7263b2-0c31-4f40-bec1-ce16e49d89fe,7eb50e08-df58-429d-b355-82b831b0ff8c,0.0,vscodium-exe,● dock.qml - desktop-client - VSCodium,Productive

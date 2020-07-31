@@ -70,7 +70,7 @@ class AppProductivity:
             query = query.order_by(
                     self.events.c.member_id,
                     self.events.c.event_time
-                ).limit(1000)
+                ).limit(100)
 
         df = pd.read_sql_query(query, con=self.engine)
         df.to_csv('events.csv', index=False, header=True)

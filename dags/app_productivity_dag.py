@@ -31,16 +31,16 @@ default_args = {
     # 'trigger_rule': 'all_success'
 }
 dag = DAG(
-    'activity_record',
+    'application_productivity_report',
     default_args=default_args,
-    description='generate activity report',
+    description='generate application productivity report',
     schedule_interval=timedelta(days=1),
 )
 
 
 def read_events(ds, **kwargs):
     app = rep.AppProductivity()
-.   app.read_events()
+    app.read_events()
 
 
 def process_data(ds, **kwargs):
@@ -54,19 +54,19 @@ def write_to_db(ds, **kwargs):
 
 
 t1 = PythonOperator(
-        task_id='t1',
+        task_id='read_events',
         provide_context=True,
         python_callable=read_events,
         dag=dag)
 
 t2 = PythonOperator(
-        task_id='t2',
+        task_id='process_data',
         provide_context=True,
         python_callable=process_data,
         dag=dag)
 
 t3 = PythonOperator(
-        task_id='t3',
+        task_id='write_to_db',
         provide_context=True,
         python_callable=write_to_db,
         dag=dag)
