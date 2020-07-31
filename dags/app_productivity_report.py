@@ -7,7 +7,7 @@ import ast
 import pendulum
 
 
-class ActivityRecord:
+class AppProductivity:
     db = Database()
     engine = db.engine
     reporting_meta = db.table('reporting_meta')
@@ -238,14 +238,4 @@ def removesuffix(string: str, suffix: str, /) -> str:
     if suffix and string.endswith(suffix):
         return string[: -len(suffix)]
     return string[:]
-
-
-
-
-if __name__ == '__main__':
-    report = ActivityRecord()
-    #report.read_events()
-    #report.process_data()
-    report.write_to_db()
-    #events = report.process_data()
 
