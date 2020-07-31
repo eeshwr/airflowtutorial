@@ -102,7 +102,7 @@ class AppProductivity:
                 data.append(values)
         df = pd.DataFrame.from_records(data)
         df.to_csv(
-            'application_productivity_report.csv',
+            'events_for_daily_report.csv',
             index=False,
             header=True)
 

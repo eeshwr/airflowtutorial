@@ -6,7 +6,7 @@ from airflow.operators.python_operator import PythonOperator
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
 from datetime import timedelta
-import app_productivity_report as rep
+import daily_report as rep
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -19,44 +19,32 @@ default_args = {
 }
 
 dag = DAG(
-    'application_productivity_report',
+    'daily_report',
     default_args=default_args,
-    description='generate application productivity report',
+    description='generate_daily_report',
     schedule_interval=timedelta(days=1),
 )
 
-
-def read_events(ds, **kwargs):
-    app = rep.AppProductivity()
-    app.read_events()
-
-
-def process_data(ds, **kwargs):
-    record = rep.AppProductivity()
-    record.process_data()
+def create_daily_report(ds, **kwargs):
+    record = rep.DailyReport()
+    record.create_daily_report()
 
 
 def write_to_db(ds, **kwargs):
-    record = rep.AppProductivity()
+    record = rep.DailyReport()
     record.write_to_db()
 
 
 t1 = PythonOperator(
-        task_id='read_events',
+        task_id='create_daily_report',
         provide_context=True,
-        python_callable=read_events,
+        python_callable=create_daily_report,
         dag=dag)
 
 t2 = PythonOperator(
-        task_id='process_data',
-        provide_context=True,
-        python_callable=process_data,
-        dag=dag)
-
-t3 = PythonOperator(
         task_id='write_to_db',
         provide_context=True,
         python_callable=write_to_db,
         dag=dag)
 
-t1 >> t2 >> t3
+t1 >> t2
