@@ -233,11 +233,3 @@ class DailyReport:
         for index, action in enumerate(list(reversed(actions))):
             if action['action_name'] == 'clock-out':
                 return len(actions) - 1 - index, action['action_timestamp']
-
-
-
-
-if __name__ == '__main__':
-    obj = DailyReport()
-    obj.generate_daily_report()
-    #obj.write_to_db()

@@ -25,9 +25,10 @@ dag = DAG(
     schedule_interval=timedelta(days=1),
 )
 
+
 def create_daily_report(ds, **kwargs):
     record = rep.DailyReport()
-    record.create_daily_report()
+    record.generate_daily_report()
 
 
 def write_to_db(ds, **kwargs):
