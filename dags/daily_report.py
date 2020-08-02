@@ -96,6 +96,55 @@ class DailyReport:
             'daily_report.csv',
             index=False,
             header=True)
+
+    def generate_daily_report(self):
+        to_timestamp = datetime.now()
+        from_timestamp = to_timestamp - timedelta(hours=12)
+
+        # from_timestamp = '2020-06-16 08:17:17.862045+00'
+        # to_timestamp = pendulum.parse(from_timestamp) + timedelta(hours=12)
+
+        df = self.read_actions(from_timestamp, to_timestamp)
+        grouped = df.groupby(['member_id', 'workspace_id'])
+        data = []
+        for (member, workspace), actions in grouped:
+            actions_dict = actions.to_dict(orient='record')
+            in_index, clock_in_time = self.clock_in_time(actions_dict)
+            out_index, clock_out_time = self.clock_out_time(actions_dict)
+
+            if(out_index is None):
+                out_index = len(actions_dict)-1
+                clock_out_time = actions_dict[-1]['action_timestamp']
+            
+            events = self.get_events_for_daily_report(
+                clock_in_time, clock_out_time, member
+            )
+            actions = actions_dict[in_index:out_index+1]
+            private_time, break_time = self.process_actions(actions)
+          
+            idle_time = self.process_events(events, threshold=3)
+            break_hours = sum(break_time) / 3600  # convert to hours
+            private_hours = sum(private_time) / 3600
+            office_hours = (clock_out_time - clock_in_time).total_seconds() / 3600
+            idle_hours = sum(idle_time) / 3600
+            active_hours = office_hours - (idle_hours + private_hours + break_hours)
+            values = {
+                "member_id": member,
+                "workspace_id": workspace,
+                "break_hours": break_hours,
+                "private_hours": private_hours,
+                "office_hours": office_hours,
+                "idle_hours": idle_hours,
+                "active_hours": active_hours,
+                "start_time": from_timestamp,
+                "end_time": to_timestamp,
+            }
+            data.append(values)
+        df = pd.DataFrame.from_records(data)
+        df.to_csv(
+            'daily_report.csv',
+            index=False,
+            header=True)
     
     def get_members_for_daily_report(self, from_timestamp, to_timestamp):
         query = sa.select(
@@ -152,8 +201,43 @@ class DailyReport:
             results = conn.execute(query).fetchall()
             return results
 
+    def read_actions(self, from_timestamp, to_timestamp):
+        query = sa.select(
+                    [
+                        self.actions.c.action_name,
+                        self.actions.c.member_id,
+                        self.actions.c.action_timestamp,
+                        self.members.c.workspace_id,
+                    ]
+                ).select_from(
+                self.actions.join(
+                        self.members,
+                        self.actions.c.member_id == self.members.c.id
+                    )
+                )
+        
+        query = query.where(
+                self.actions.c.action_timestamp.between(
+                    from_timestamp, to_timestamp)
+        )
+
+        df = pd.read_sql_query(query, con=self.engine)
+        return df
+
+    def clock_in_time(self, actions):
+        for index, action in enumerate(actions):
+            if action['action_name'] == 'clock-in':
+                return index, action['action_timestamp']
+
+    def clock_out_time(self, actions):
+        for index, action in enumerate(list(reversed(actions))):
+            if action['action_name'] == 'clock-out':
+                return len(actions) - 1 - index, action['action_timestamp']
+
+
+
 
 if __name__ == '__main__':
     obj = DailyReport()
-    obj.create_daily_report()
-    obj.write_to_db()
+    obj.generate_daily_report()
+    #obj.write_to_db()
